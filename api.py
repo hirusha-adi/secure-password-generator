@@ -1,9 +1,9 @@
 from fastapi import FastAPI
+from base import SecurePassword
 
 app = FastAPI()
+gen = SecurePassword()
 
-app.route("/")
+@app.get("/")
 def home():
-    return {
-        "Data": "testing"
-    }
+    return {"password": str(gen.password())}
