@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Path
+from fastapi import FastAPI
 from base import SecurePassword
 import typing as t
 
