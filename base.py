@@ -9,7 +9,7 @@ class SecurePassword:
         self._sysrand = SystemRandom()
         
         self._passwd = None
-        self._generated_count: int = 1
+        self._generated_count: int = 0
         
         self._ascii_lowercase = 'abcdefghijklmnopqrstuvwxyz'
         self._ascii_uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -22,7 +22,7 @@ class SecurePassword:
     
     def password(
         self,
-        length: t.Union[int, None] = None, 
+        length: t.Union[int, None] = 12, 
         lower: t.Union[bool, None] = None,
         upper: t.Union[bool, None] = None, 
         digits: t.Union[bool, None] = None, 
@@ -30,7 +30,8 @@ class SecurePassword:
     ):
         
         character_set = r""
-        if (150 <= length) and (length >= 3):
+        if not((150 <= length) and (length >= 3)):
+            length = 12
             if lower:
                 character_set += self._ascii_lowercase
             if upper:
@@ -48,7 +49,5 @@ class SecurePassword:
             )  
 
         self._generated_count += 1
-
-obj = SecurePassword()
-obj.password(100)
-print(obj)
+        
+        return self._passwd
