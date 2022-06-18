@@ -1,2 +1,3 @@
 # secure-password-generator
-a truly random password
+
+a simple usage of FastAPI (my very first time :) )
