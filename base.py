@@ -22,27 +22,32 @@ class SecurePassword:
     
     def password(
         self,
-        length: t.Union[int, None] = 12, 
-        lower: t.Union[bool, None] = None,
+        length: t.Union[int, None] = None, 
+        lower: t.Union[bool, None] = True,
         upper: t.Union[bool, None] = None, 
         digits: t.Union[bool, None] = None, 
         symbols: t.Union[bool, None] = None
     ):
-        
-        character_set = r""
-        if not((250 <= length) and (length >= 3)):
-            length = 12
-            if lower:
-                character_set += self._ascii_lowercase
-            if upper:
-                character_set += self._ascii_uppercase
-            if digits:
-                character_set += self._digits
-            if symbols:
-                character_set += self._digits
 
+        try:
+            if ((250 >= length) and (length <= 3)):
+                length = 12
+        except TypeError:
+            length = 12
+            
+        character_set = r""
+        if lower:
+            character_set += self._ascii_lowercase
+        if upper:
+            character_set += self._ascii_uppercase
+        if digits:
+            character_set += self._digits
+        if symbols:
+            character_set += self._digits
+
+        
         self._passwd = ''.join(
-            self._sysrand.choice(self._all) 
+            self._sysrand.choice(character_set) 
             for i in range(
                 length
                 )
