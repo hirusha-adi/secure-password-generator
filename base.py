@@ -30,7 +30,7 @@ class SecurePassword:
     ):
         
         character_set = r""
-        if not((150 <= length) and (length >= 3)):
+        if not((250 <= length) and (length >= 3)):
             length = 12
             if lower:
                 character_set += self._ascii_lowercase
