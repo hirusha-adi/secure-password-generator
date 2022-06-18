@@ -1,9 +1,28 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Path
 from base import SecurePassword
+import typing as t
 
 app = FastAPI()
 gen = SecurePassword()
 
 @app.get("/")
-def home():
-    return {"password": str(gen.password())}
+def custom(
+    length: t.Optional[int] = None,
+    lower: t.Optional[int] = 1,
+    upper: t.Optional[int] = 0,
+    digits: t.Optional[int] = 0,
+    symbols: t.Optional[int] = 0,
+    ):
+    
+    return {
+        "password": str(
+            gen.password(
+                length=length,
+                lower=lower,
+                upper=upper,
+                digits=digits,
+                symbols=symbols,
+                )
+            )
+        }
+    
