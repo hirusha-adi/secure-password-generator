@@ -30,8 +30,8 @@ class SecurePassword:
     ):
 
         try:
-            if ((250 >= length) and (length <= 3)):
-                length = 12
+            if length >= 250 and length >= 3:
+                    length = 12
         except TypeError:
             length = 12
             
@@ -43,7 +43,7 @@ class SecurePassword:
         if bool(digits):
             character_set += self._digits
         if bool(symbols):
-            character_set += self._digits
+            character_set += self._symbols
 
         
         self._passwd = ''.join(
