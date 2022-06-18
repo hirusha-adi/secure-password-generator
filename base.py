@@ -23,10 +23,10 @@ class SecurePassword:
     def password(
         self,
         length: t.Union[int, None] = None, 
-        lower: t.Union[bool, None] = True,
-        upper: t.Union[bool, None] = None, 
-        digits: t.Union[bool, None] = None, 
-        symbols: t.Union[bool, None] = None
+        lower: t.Union[bool, int, None] = True,
+        upper: t.Union[bool, int, None] = None, 
+        digits: t.Union[bool, int, None] = None, 
+        symbols: t.Union[bool, int, None] = None
     ):
 
         try:
@@ -36,13 +36,13 @@ class SecurePassword:
             length = 12
             
         character_set = r""
-        if lower:
+        if bool(lower):
             character_set += self._ascii_lowercase
-        if upper:
+        if bool(upper):
             character_set += self._ascii_uppercase
-        if digits:
+        if bool(digits):
             character_set += self._digits
-        if symbols:
+        if bool(symbols):
             character_set += self._digits
 
         
